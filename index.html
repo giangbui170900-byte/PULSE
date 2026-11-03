@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PULSE – Bộ công cụ phỏng vấn và lương</title>
+<style>
+html,body{height:100%;margin:0;font-family:"Segoe UI",system-ui,sans-serif;background:#0f1b33}
+nav{display:flex;gap:6px;padding:8px 10px;background:#0f1b33;height:52px;box-sizing:border-box}
+nav button{flex:1;max-width:260px;border:0;border-radius:8px;background:#1a2a4a;color:#cfd8ea;font:600 15px inherit;cursor:pointer}
+nav button.on{background:#2f7df6;color:#fff}
+nav button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+iframe{display:none;width:100%;height:calc(100% - 52px);border:0;background:#f2f5fa}
+iframe.on{display:block}
+@media print{nav{display:none}iframe{height:100%}}
+</style></head><body>
+<nav><button id="b1">Luyện phỏng vấn</button><button id="b2">Thương lượng lương</button></nav>
+<iframe id="f1" title="Luyện phỏng vấn" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;vi&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Luyện phỏng vấn – PULSE&lt;/title&gt;
+&lt;style&gt;
+:root{--navy:#0f1b33;--navy2:#1a2a4a;--blue:#2f7df6;--bg:#f2f5fa;--card:#fff;--tx:#1b2438;--mu:#5d6a85;--ln:#dde3ee}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 &quot;Segoe UI&quot;,system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+aside{position:fixed;inset:0 auto 0 0;width:260px;background:var(--navy);color:#cfd8ea;padding:20px 14px;overflow:auto}
+aside h1{font-size:18px;color:#fff;margin:0 0 4px}aside small{color:#8fa0c2}
+aside button{display:flex;justify-content:space-between;width:100%;margin-top:6px;padding:10px 12px;background:none;border:0;border-radius:8px;color:inherit;font:inherit;cursor:pointer;text-align:left}
+aside button:hover{background:var(--navy2)}aside button.on{background:var(--blue);color:#fff}
+main{margin-left:260px;padding:24px;max-width:960px}
+.bar{height:8px;background:var(--ln);border-radius:8px;overflow:hidden;margin:6px 0 16px}.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tools input{flex:1 1 240px;padding:10px 12px;border:1px solid var(--ln);border-radius:8px;font:inherit}
+button.t{padding:9px 13px;border:1px solid var(--ln);background:#fff;border-radius:8px;font:inherit;cursor:pointer}button.t.on{background:var(--navy);color:#fff}
+h2{font-size:18px;margin:26px 0 8px;color:var(--navy)}
+.c{background:var(--card);border:1px solid var(--ln);border-radius:10px;margin-bottom:8px}
+.h{display:flex;gap:10px;align-items:center;padding:12px 14px;cursor:pointer}.h .n{color:var(--blue);font-weight:700;min-width:26px}.h .t{flex:1;font-weight:600}
+.ic{border:0;background:none;font-size:20px;color:#b6bfd1;cursor:pointer}.ic.on{color:#f5a623}
+.b{display:none;padding:0 14px 14px 50px}.c.o .b{display:block}
+.a{margin:0 0 10px}.bl{filter:blur(6px);user-select:none}
+.bt{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.bt button{padding:7px 12px;border:1px solid var(--blue);color:var(--blue);background:#fff;border-radius:7px;cursor:pointer;font:inherit}
+.tip{font-size:14px;color:var(--mu);margin:0 0 10px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(max-width:800px){aside{position:static;width:auto}main{margin:0;padding:14px}.b{padding-left:14px}}
+@media print{aside,.tools,.bt,.ic{display:none}main{margin:0}.b{display:block!important}.bl{filter:none}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;aside&gt;&lt;h1&gt;Luyện phỏng vấn&lt;/h1&gt;&lt;small&gt;Bùi Quỳnh Giang · Logistics Sự kiện và Kho · PULSE&lt;/small&gt;&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;&lt;/aside&gt;
+&lt;main&gt;
+&lt;div&gt;Tiến độ luyện tập: &lt;b id=&quot;pc&quot;&gt;0/0&lt;/b&gt;&lt;/div&gt;&lt;div class=&quot;bar&quot;&gt;&lt;i id=&quot;pb&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+&lt;div class=&quot;tools&quot;&gt;&lt;input id=&quot;q&quot; type=&quot;search&quot; placeholder=&quot;Tìm câu hỏi...&quot; aria-label=&quot;Tìm câu hỏi&quot;&gt;
+&lt;button class=&quot;t&quot; id=&quot;bs&quot;&gt;★ Câu quan trọng&lt;/button&gt;&lt;button class=&quot;t&quot; id=&quot;bp&quot;&gt;Chế độ luyện tập&lt;/button&gt;&lt;button class=&quot;t&quot; onclick=&quot;print()&quot;&gt;In / Lưu PDF&lt;/button&gt;&lt;button class=&quot;t&quot; id=&quot;br&quot;&gt;Đặt lại tiến độ&lt;/button&gt;&lt;/div&gt;
+&lt;div id=&quot;list&quot;&gt;&lt;/div&gt;&lt;/main&gt;
+&lt;script&gt;
+const G={A:&quot;Giới thiệu bản thân&quot;,B:&quot;Kinh nghiệm&quot;,C:&quot;Tình huống chuyên môn&quot;,D:&quot;Thái độ và khả năng làm việc&quot;,E:&quot;Câu hỏi dành cho nhà tuyển dụng&quot;,F:&quot;Câu hỏi khó HR có thể hỏi&quot;};
+const D=[
+[&quot;A&quot;,&quot;Hãy giới thiệu về bản thân.&quot;,&quot;Em chào anh/chị, em là Bùi Quỳnh Giang, vừa hoàn tất chương trình Logistics và Quản lý Chuỗi cung ứng tại Đại học Giao thông Vận tải TP.HCM, GPA 3.74/4.0, hiện đang chờ bằng tốt nghiệp. Năm 2025 em học thêm khóa Xuất nhập khẩu và Logistics ở Tân Minh Trí. Từ 18/08 đến 15/11/2026 em thực tập chăm sóc khách hàng tại J&amp;T Express, kiểm tra trọng lượng thực tế so với khai báo trên JMS, mỗi ngày xử lý tối thiểu 2.000 đơn. Em cẩn thận với số liệu và muốn phát triển ở mảng kho và hậu cần.&quot;],
+[&quot;A&quot;,&quot;Tại sao bạn ứng tuyển vị trí này?&quot;,&quot;Em học Logistics nên muốn làm đúng chuyên ngành, và em thấy kho cùng hậu cần sự kiện là nơi em có thể học nhanh nhất. Ở J&amp;T, việc của em là đối chiếu số liệu, tìm chênh lệch và phối hợp xử lý, nên em quen với sự chính xác. Em chưa có kinh nghiệm kho trực tiếp, nhưng em muốn bắt đầu từ vị trí này và được đào tạo bài bản.&quot;],
+[&quot;A&quot;,&quot;Tại sao bạn chọn PULSE?&quot;,&quot;Em thấy PULSE vừa thương mại vừa sản xuất, nên công việc kho và hậu cần có nhiều tình huống thực tế để học. Vị trí này kết hợp quản lý hàng hóa với hậu cần sự kiện, đòi hỏi cẩn thận và phối hợp nhiều bên, đúng với điểm mạnh của em. Em cũng muốn hiểu thêm về định hướng của công ty để làm việc cho phù hợp.&quot;,&quot;Trước buổi phỏng vấn, hãy đọc website/fanpage PULSE và thêm 1–2 chi tiết thật về sản phẩm hoặc sự kiện của công ty.&quot;],
+[&quot;B&quot;,&quot;Công việc tại J&amp;T có liên quan gì đến vị trí này?&quot;,&quot;Ở J&amp;T em kiểm tra trọng lượng thực tế với thông tin khai báo trên JMS, ghi nhận phạt trọng lượng cho bưu cục (trung bình 150 đơn mỗi ngày) và tổng hợp, đối chiếu dữ liệu trên Feishu Sheets. Công việc kho cũng cần so số thực tế với chứng từ, nên kỹ năng kiểm tra, đối chiếu và báo cáo chênh lệch của em dùng được. Em cũng quen liên hệ khách hàng và phối hợp bộ phận khác khi có phát sinh. Em hiểu đây chưa phải công việc kho, nhưng là nền tảng cho nó.&quot;],
+[&quot;B&quot;,&quot;Bạn đã từng làm quản lý kho chưa?&quot;,&quot;Dạ chưa, em chưa từng quản lý kho. Em có kiến thức về chuỗi cung ứng từ trường và khóa học, cùng kinh nghiệm kiểm tra và đối chiếu số liệu ở J&amp;T. Em sẽ học quy trình nhập, xuất, kiểm kê của công ty từ những việc cơ bản và hỏi khi chưa chắc để tránh sai sót.&quot;],
+[&quot;B&quot;,&quot;Bạn có kinh nghiệm tổ chức sự kiện không?&quot;,&quot;Dạ em chưa có kinh nghiệm tổ chức sự kiện. Em muốn nói rõ như vậy để anh/chị đánh giá đúng. Điều em có là sự cẩn thận, khả năng phối hợp và tinh thần học hỏi. Em sẵn sàng đi theo anh chị trong các sự kiện đầu để nắm quy trình chuẩn bị, vận chuyển và thu hồi hàng.&quot;],
+[&quot;C&quot;,&quot;Số lượng hàng thực tế không khớp phiếu xuất kho thì xử lý thế nào?&quot;,&quot;Em sẽ đếm lại ít nhất một lần, có thể nhờ người thứ hai kiểm cùng. Nếu vẫn lệch, em ghi rõ mã hàng, số theo phiếu, số thực tế và chênh lệch, rồi báo ngay người phụ trách để xử lý trước khi hàng đi. Em không tự sửa phiếu. Cách này giống việc em đối chiếu trọng lượng với dữ liệu khai báo ở J&amp;T: thấy lệch thì ghi nhận và báo đúng người.&quot;],
+[&quot;C&quot;,&quot;Hàng hóa bị hư hỏng trước sự kiện thì xử lý ra sao?&quot;,&quot;Trước tiên em chụp ảnh và ghi nhận số lượng, tình trạng hư hỏng, rồi báo ngay quản lý để biết còn kịp thay thế hay không. Em tách riêng hàng lỗi để không lẫn vào hàng tốt, rồi hỗ trợ kiểm tra lại số hàng còn lại. Việc liên hệ nhà cung cấp hay đổi hàng em sẽ làm theo hướng dẫn của quản lý.&quot;],
+[&quot;C&quot;,&quot;Nhiều đơn hàng cần chuẩn bị cùng lúc thì sắp xếp thế nào?&quot;,&quot;Em liệt kê tất cả đơn, sắp theo thời hạn giao và mức độ quan trọng, rồi hỏi quản lý nếu hai việc cùng gấp. Em chia việc thành các bước: lấy hàng, kiểm, đóng gói, dán nhãn và có bảng theo dõi tiến độ. Ở J&amp;T em quen xử lý số lượng lớn mỗi ngày nên em chú ý làm có hệ thống, không làm vội dễ sót.&quot;],
+[&quot;C&quot;,&quot;Hàng hóa sau sự kiện bị thiếu thì xử lý ra sao?&quot;,&quot;Em đối chiếu danh sách hàng xuất đi với hàng nhận về để biết chính xác thiếu gì, bao nhiêu. Sau đó em hỏi lại các bộ phận hoặc người đã nhận hàng xem có để sót ở địa điểm hay chưa bàn giao không. Nếu vẫn thiếu, em báo quản lý kèm bảng chênh lệch để quyết định xử lý. Em cũng đề xuất kiểm đếm có ký nhận ở cả hai chiều cho các sự kiện sau.&quot;],
+[&quot;C&quot;,&quot;Nhà cung cấp báo giá cao hơn ngân sách thì làm gì?&quot;,&quot;Em sẽ báo quản lý trước, không tự quyết. Sau đó em so báo giá với ít nhất hai nhà cung cấp khác, xem lại điều kiện như số lượng, thời gian giao, vận chuyển. Em có thể đề nghị nhà cung cấp điều chỉnh giá hoặc đổi quy cách. Em đang học phần này, nên rất mong được anh chị hướng dẫn cách PULSE làm việc với nhà cung cấp.&quot;],
+[&quot;D&quot;,&quot;Điểm mạnh của bạn?&quot;,&quot;Em cẩn thận với số liệu. Ở J&amp;T em kiểm tra tối thiểu 2.000 đơn mỗi ngày và đối chiếu dữ liệu trên Feishu Sheets, nên em quen soát lại để giảm sai sót. Em cũng trung thực: có lỗi thì báo sớm. Ngoài ra em chủ động học, như khóa Xuất nhập khẩu và Logistics em tự đăng ký.&quot;],
+[&quot;D&quot;,&quot;Điểm yếu của bạn?&quot;,&quot;Em chưa có kinh nghiệm kho thực tế và chưa quen thao tác bốc xếp, nên lúc đầu có thể chậm hơn người đã làm. Em xử lý bằng cách hỏi kỹ quy trình, ghi chép và luyện tập. Em cũng đôi khi quá kỹ với số liệu nên mất thời gian, em đang tập đặt ra thời hạn cho từng việc.&quot;],
+[&quot;D&quot;,&quot;Có sẵn sàng tăng ca hoặc làm cuối tuần khi có sự kiện không?&quot;,&quot;Dạ em hiểu đặc thù sự kiện là có lúc phải làm ngoài giờ hoặc cuối tuần, và em sẵn sàng sắp xếp. Em chỉ mong được biết trước lịch sớm để chuẩn bị, và hỏi thêm công ty tính tăng ca hay nghỉ bù thế nào.&quot;],
+[&quot;D&quot;,&quot;Khi nào có thể bắt đầu làm việc?&quot;,&quot;Kỳ thực tập của em tại J&amp;T kết thúc ngày 15/11/2026 nên em có thể bắt đầu sau ngày đó. Nếu công ty cần sớm hơn, em xin trao đổi để sắp xếp bàn giao ổn thỏa.&quot;],
+[&quot;E&quot;,&quot;Công việc chủ yếu tại kho hay địa điểm sự kiện?&quot;,&quot;Em muốn biết tỷ lệ thời gian giữa làm việc tại kho và ở địa điểm sự kiện để chuẩn bị sức khỏe và phương tiện đi lại phù hợp.&quot;,&quot;Có thể hỏi nguyên văn câu trên.&quot;],
+[&quot;E&quot;,&quot;Nhân viên mới được đào tạo những quy trình nào?&quot;,&quot;Em muốn hiểu lộ trình đào tạo ban đầu, như nhập xuất, kiểm kê, phần mềm quản lý, để biết cần chuẩn bị gì.&quot;],
+[&quot;E&quot;,&quot;Công việc kho và hậu cần sự kiện được phân chia ra sao?&quot;,&quot;Em muốn biết công việc hằng tuần là kho nhiều hơn hay sự kiện nhiều hơn, và ai sẽ hướng dẫn trực tiếp em.&quot;],
+[&quot;E&quot;,&quot;Có phụ cấp khi làm ngoài giờ hoặc cuối tuần không?&quot;,&quot;Em muốn hỏi rõ chính sách tăng ca và làm cuối tuần cho sự kiện: tính tiền hay nghỉ bù, để em có kế hoạch phù hợp.&quot;],
+[&quot;E&quot;,&quot;Công ty đánh giá hiệu quả công việc theo tiêu chí nào?&quot;,&quot;Em muốn biết ở vị trí này công ty đánh giá điều gì là tốt, như độ chính xác kiểm kê hay đúng tiến độ, để em tập trung đúng hướng ngay từ đầu.&quot;],
+[&quot;F&quot;,&quot;Bạn chưa có kinh nghiệm kho và sự kiện, vì sao tôi nên chọn bạn?&quot;,&quot;Em không có kinh nghiệm kho hay sự kiện, và em không muốn nói quá. Điều em có là nền tảng Logistics, GPA 3.74, kinh nghiệm đối chiếu hàng nghìn đơn mỗi ngày ở J&amp;T, và sự cẩn thận khi làm việc với số liệu. Công ty nhận ứng viên chưa có kinh nghiệm và đào tạo, nên em xin cơ hội chứng minh bằng sự chăm chỉ và học nhanh.&quot;],
+[&quot;F&quot;,&quot;Công việc kho có thể nặng và vất vả. Bạn có chịu được không?&quot;,&quot;Em hiểu có lúc phải bốc xếp, đứng nhiều và làm gấp. Em chưa làm kho nên chưa dám nói là quen, nhưng em sẵn sàng thích nghi, làm theo hướng dẫn an toàn và nhờ đồng nghiệp chỉ cách làm đúng. Em cũng sẽ giữ sức khỏe để không ảnh hưởng tiến độ chung.&quot;],
+[&quot;F&quot;,&quot;Bạn làm sai số liệu một lần thì sao? Bạn đã từng sai chưa?&quot;,&quot;Ai làm việc với số liệu nhiều cũng có lúc sai. Khi em phát hiện sai, em báo người phụ trách ngay, sửa lại và kiểm lại phần liên quan. Em đối chiếu thêm một lượt trước khi gửi để hạn chế lặp lại. Em nghĩ quan trọng là trung thực và sửa nhanh, không giấu.&quot;],
+[&quot;F&quot;,&quot;Bạn dự định gắn bó bao lâu và định hướng của bạn là gì?&quot;,&quot;Em muốn làm ổn định ít nhất vài năm để học vững kho và hậu cần. Trước mắt em tập trung hoàn thành tốt công việc, sau đó học thêm về lập kế hoạch tồn kho và làm việc với nhà cung cấp, vì đó cũng là phần của vị trí này.&quot;]
+];
+const $=s=&gt;document.querySelector(s);let S;try{S=JSON.parse(localStorage.getItem(&#x27;pq&#x27;))||{}}catch(e){S={}}S.s=S.s||{};S.d=S.d||{};
+const save=()=&gt;{try{localStorage.setItem(&#x27;pq&#x27;,JSON.stringify(S))}catch(e){}};
+let grp=&#x27;all&#x27;,prac=false,onlyS=false,O={},R={};
+function prog(){const n=D.filter((_,i)=&gt;S.d[i]).length;$(&#x27;#pc&#x27;).textContent=n+&#x27;/&#x27;+D.length;$(&#x27;#pb&#x27;).style.width=(100*n/D.length)+&#x27;%&#x27;}
+function nav(){let h=`&lt;button class=&quot;${grp==&#x27;all&#x27;?&#x27;on&#x27;:&#x27;&#x27;}&quot; onclick=&quot;sg(&#x27;all&#x27;)&quot;&gt;&lt;span&gt;Tất cả&lt;/span&gt;&lt;span&gt;${D.length}&lt;/span&gt;&lt;/button&gt;`;
+Object.keys(G).forEach(k=&gt;h+=`&lt;button class=&quot;${grp==k?&#x27;on&#x27;:&#x27;&#x27;}&quot; onclick=&quot;sg(&#x27;${k}&#x27;)&quot;&gt;&lt;span&gt;${k}. ${G[k]}&lt;/span&gt;&lt;span&gt;${D.filter(x=&gt;x[0]==k).length}&lt;/span&gt;&lt;/button&gt;`);$(&#x27;#nav&#x27;).innerHTML=h}
+function render(){const q=$(&#x27;#q&#x27;).value.toLowerCase();let h=&#x27;&#x27;,n=0;
+Object.keys(G).forEach(k=&gt;{if(grp!=&#x27;all&#x27;&amp;&amp;grp!=k)return;const it=D.map((x,i)=&gt;[x,i]).filter(([x,i])=&gt;x[0]==k&amp;&amp;(!onlyS||S.s[i])&amp;&amp;(x[1]+x[2]).toLowerCase().includes(q));if(!it.length)return;
+h+=`&lt;h2&gt;${k}. ${G[k]}&lt;/h2&gt;`;
+it.forEach(([x,i])=&gt;{n++;const hide=prac&amp;&amp;!R[i];
+h+=`&lt;div class=&quot;c ${O[i]?&#x27;o&#x27;:&#x27;&#x27;}&quot;&gt;&lt;div class=&quot;h&quot; onclick=&quot;tg(${i})&quot;&gt;&lt;span class=&quot;n&quot;&gt;${i+1}&lt;/span&gt;&lt;span class=&quot;t&quot;&gt;${x[1]}&lt;/span&gt;&lt;button class=&quot;ic ${S.s[i]?&#x27;on&#x27;:&#x27;&#x27;}&quot; onclick=&quot;event.stopPropagation();st(${i})&quot; title=&quot;Đánh dấu quan trọng&quot; aria-label=&quot;Đánh dấu quan trọng&quot;&gt;★&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;b&quot;&gt;${x[3]?`&lt;p class=&quot;tip&quot;&gt;Gợi ý: ${x[3]}&lt;/p&gt;`:&#x27;&#x27;}&lt;p class=&quot;a ${hide?&#x27;bl&#x27;:&#x27;&#x27;}&quot;&gt;${x[2]}&lt;/p&gt;&lt;div class=&quot;bt&quot;&gt;${hide?`&lt;button onclick=&quot;rv(${i})&quot;&gt;Hiện gợi ý&lt;/button&gt;`:&#x27;&#x27;}&lt;button onclick=&quot;cp(${i},this)&quot;&gt;Sao chép&lt;/button&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; ${S.d[i]?&#x27;checked&#x27;:&#x27;&#x27;} onchange=&quot;dn(${i},this.checked)&quot;&gt; Đã luyện tập&lt;/label&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;`})});
+$(&#x27;#list&#x27;).innerHTML=n?h:&#x27;&lt;p&gt;Không có câu hỏi phù hợp. Hãy đổi từ khóa hoặc tắt bộ lọc.&lt;/p&gt;&#x27;;nav();prog()}
+function sg(k){grp=k;render()}
+function tg(i){O[i]=!O[i];render()}
+function st(i){S.s[i]=!S.s[i];save();render()}
+function dn(i,v){S.d[i]=v;save();prog()}
+function rv(i){R[i]=true;render()}
+function cp(i,b){const t=D[i][2];const ok=()=&gt;{b.textContent=&#x27;Đã sao chép&#x27;;setTimeout(()=&gt;b.textContent=&#x27;Sao chép&#x27;,1500)};
+if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,()=&gt;fb(t,ok));else fb(t,ok)}
+function fb(t,ok){const a=document.createElement(&#x27;textarea&#x27;);a.value=t;document.body.appendChild(a);a.select();try{document.execCommand(&#x27;copy&#x27;);ok()}catch(e){}a.remove()}
+$(&#x27;#q&#x27;).oninput=render;
+$(&#x27;#bs&#x27;).onclick=function(){onlyS=!onlyS;this.classList.toggle(&#x27;on&#x27;,onlyS);render()};
+$(&#x27;#bp&#x27;).onclick=function(){prac=!prac;R={};O={};this.classList.toggle(&#x27;on&#x27;,prac);this.textContent=prac?&#x27;Tắt chế độ luyện tập&#x27;:&#x27;Chế độ luyện tập&#x27;;render()};
+$(&#x27;#br&#x27;).onclick=()=&gt;{if(confirm(&#x27;Xóa toàn bộ tiến độ và dấu sao?&#x27;)){S={s:{},d:{}};save();render()}};
+render();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<iframe id="f2" title="Thương lượng lương" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;vi&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Thương lượng lương – PULSE&lt;/title&gt;
+&lt;style&gt;
+:root{--navy:#0f1b33;--navy2:#1a2a4a;--blue:#2f7df6;--bg:#f2f5fa;--card:#fff;--tx:#1b2438;--mu:#5d6a85;--ln:#dde3ee}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 &quot;Segoe UI&quot;,system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+header{background:var(--navy);color:#fff;padding:22px 24px}header h1{margin:0;font-size:22px}header p{margin:4px 0 0;color:#a9b8d6}
+main{max-width:960px;margin:0 auto;padding:20px}
+.warn{background:#fff6e0;border:1px solid #f0d58a;border-radius:10px;padding:12px 14px;margin-bottom:16px}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:8px}
+.k div{background:var(--navy);color:#fff;border-radius:10px;padding:14px}.k b{display:block;font-size:24px}.k span{color:#a9b8d6;font-size:14px}
+h2{font-size:19px;color:var(--navy);margin:28px 0 8px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:10px;padding:14px;margin-bottom:10px}
+.card h3{margin:0 0 8px;font-size:16px}.hr{color:var(--mu);margin:0 0 6px}.me{margin:0 0 8px}.nt{font-size:14px;color:var(--mu);margin:0 0 8px}
+button{padding:7px 12px;border:1px solid var(--blue);color:var(--blue);background:#fff;border-radius:7px;cursor:pointer;font:inherit}button.d{background:var(--navy);color:#fff;border-color:var(--navy)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.w{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ln)}th,td{padding:9px 11px;border-bottom:1px solid var(--ln);text-align:left;vertical-align:top}th{background:#e8eef9}
+ul{margin:6px 0;padding-left:22px}label{display:block;padding:6px 0;cursor:pointer}
+textarea{width:100%;min-height:170px;padding:10px;border:1px solid var(--ln);border-radius:8px;font:inherit}
+@media print{button{display:none}header{background:#fff;color:#000}}
+&lt;/style&gt;&lt;/head&gt;&lt;body&gt;
+&lt;header&gt;&lt;h1&gt;Thương lượng lương – Nhân viên Logistics Sự kiện và Kho, PULSE&lt;/h1&gt;&lt;p&gt;Bùi Quỳnh Giang · Bộ công cụ chuẩn bị trước khi trao đổi offer&lt;/p&gt;&lt;/header&gt;
+&lt;main&gt;
+&lt;div class=&quot;warn&quot;&gt;&lt;b&gt;Lưu ý:&lt;/b&gt; khoảng lương dưới đây là mức Giang tự đề xuất để chuẩn bị, &lt;b&gt;không phải mức lương đã xác minh của PULSE&lt;/b&gt;. Hãy xác nhận ngân sách thực tế với nhà tuyển dụng.&lt;/div&gt;
+&lt;div class=&quot;k&quot;&gt;&lt;div&gt;&lt;b&gt;8–9 triệu&lt;/b&gt;&lt;span&gt;Khoảng đề xuất, gross/tháng&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;8.500.000 đ&lt;/b&gt;&lt;span&gt;Mức kỳ vọng ban đầu, gross/tháng&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;button class=&quot;d&quot; onclick=&quot;print()&quot;&gt;In / Lưu PDF&lt;/button&gt;&lt;/p&gt;
+
+&lt;h2&gt;Các tình huống thương lượng&lt;/h2&gt;&lt;div id=&quot;sc&quot;&gt;&lt;/div&gt;
+
+&lt;h2&gt;So sánh nhanh các mức HR đề xuất&lt;/h2&gt;
+&lt;div class=&quot;w&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;HR đề xuất&lt;/th&gt;&lt;th&gt;Hướng xử lý&lt;/th&gt;&lt;th&gt;Điều cần hỏi&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7 triệu&lt;/td&gt;&lt;td&gt;Chưa nhận ngay, hỏi tổng thu nhập&lt;/td&gt;&lt;td&gt;Gross/net, phụ cấp, tăng ca, di chuyển&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7,5 triệu&lt;/td&gt;&lt;td&gt;Gần kỳ vọng, thương lượng lộ trình tăng&lt;/td&gt;&lt;td&gt;Tiêu chí đánh giá và điều chỉnh sau thử việc&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8 triệu&lt;/td&gt;&lt;td&gt;Trong khoảng mong muốn, xác nhận chi tiết&lt;/td&gt;&lt;td&gt;Gross/net, thử việc, BHXH, phúc lợi&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+
+&lt;h2&gt;Cần xác nhận trước khi nhận việc&lt;/h2&gt;
+&lt;div class=&quot;w&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Nội dung&lt;/th&gt;&lt;th&gt;Thông tin cần xác nhận&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Lương&lt;/td&gt;&lt;td&gt;Gross hay net?&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Thử việc&lt;/td&gt;&lt;td&gt;Thời gian và mức hưởng?&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Phụ cấp&lt;/td&gt;&lt;td&gt;Ăn uống, gửi xe, điện thoại, di chuyển?&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Tăng ca&lt;/td&gt;&lt;td&gt;Tính tiền hay nghỉ bù?&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sự kiện&lt;/td&gt;&lt;td&gt;Có phụ cấp cuối tuần và ngoài giờ?&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Công tác&lt;/td&gt;&lt;td&gt;Có hỗ trợ chi phí di chuyển?&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;BHXH&lt;/td&gt;&lt;td&gt;Thời điểm tham gia?&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Đánh giá&lt;/td&gt;&lt;td&gt;Bao lâu xem xét điều chỉnh lương?&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+
+&lt;h2&gt;Khi chưa có kinh nghiệm trực tiếp&lt;/h2&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;ul&gt;
+&lt;li&gt;Nói thẳng điều chưa có, rồi nêu ngay điều đã làm: kiểm tra, đối chiếu dữ liệu đơn hàng tại J&amp;amp;T.&lt;/li&gt;
+&lt;li&gt;Đưa khoảng lương (8–9 triệu) thay vì một con số cố định.&lt;/li&gt;
+&lt;li&gt;Nếu bị trả thấp hơn, xin lộ trình: đánh giá sau thử việc, phụ cấp, hoặc đào tạo.&lt;/li&gt;
+&lt;li&gt;Dùng dữ kiện thật (GPA 3.74, 2.000 đơn/ngày, khóa học 2025), không nói quá.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+&lt;h2&gt;Lỗi cần tránh&lt;/h2&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;ul&gt;
+&lt;li&gt;Nhận ngay con số đầu tiên mà chưa hỏi gross hay net.&lt;/li&gt;
+&lt;li&gt;Đưa mức lương quá cao hoặc nêu con số mà không có lý do.&lt;/li&gt;
+&lt;li&gt;Nói mình có kinh nghiệm kho, sự kiện khi chưa có.&lt;/li&gt;
+&lt;li&gt;So sánh lương với người khác hoặc nói về áp lực tiền bạc cá nhân.&lt;/li&gt;
+&lt;li&gt;Từ chối cứng ngay trong buổi phỏng vấn, thay vì xin thời gian cân nhắc.&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+&lt;h2&gt;Checklist đánh giá offer&lt;/h2&gt;
+&lt;div class=&quot;card&quot; id=&quot;ck&quot;&gt;&lt;/div&gt;
+
+&lt;h2&gt;Mẫu tin nhắn phản hồi offer sau phỏng vấn&lt;/h2&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;textarea id=&quot;tp&quot; aria-label=&quot;Mẫu tin nhắn&quot;&gt;Chào anh/chị [tên HR],
+
+Em là Bùi Quỳnh Giang. Em cảm ơn anh/chị và PULSE đã dành thời gian phỏng vấn và gửi đề xuất cho vị trí Nhân viên Logistics Sự kiện và Kho.
+
+Em rất quan tâm đến vị trí này. Để em xác nhận chính xác, anh/chị cho em hỏi thêm về: mức lương là gross hay net, chế độ thử việc, phụ cấp, chính sách tăng ca và làm cuối tuần cho sự kiện, thời điểm đóng BHXH, và thời gian đánh giá điều chỉnh lương.
+
+Em xin phép phản hồi chính thức trong vòng [số] ngày sau khi nhận thông tin. Em cảm ơn anh/chị.
+
+Trân trọng,
+Bùi Quỳnh Giang&lt;/textarea&gt;&lt;p&gt;&lt;button onclick=&quot;cpt($(&#x27;#tp&#x27;).value,this)&quot;&gt;Sao chép tin nhắn&lt;/button&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/main&gt;
+&lt;script&gt;
+const $=s=&gt;document.querySelector(s);
+const SC=[
+[&quot;Tình huống 1: HR hỏi mức lương mong muốn&quot;,&quot;Anh/chị mong muốn mức lương bao nhiêu?&quot;,&quot;Dạ, với vị trí này em mong muốn khoảng 8 đến 9 triệu gross mỗi tháng. Em hiểu mình chưa có kinh nghiệm kho trực tiếp nên em cũng linh hoạt, và quan tâm đến cơ hội đào tạo và lộ trình phát triển. Em mong được biết ngân sách của công ty cho vị trí này để trao đổi thêm.&quot;,&quot;Đưa khoảng, không đưa một con số cố định. Mức 8.500.000 đ là điểm xuất phát của Giang.&quot;],
+[&quot;Tình huống 2: HR đề xuất 7 triệu&quot;,&quot;Công ty có thể đề xuất 7 triệu.&quot;,&quot;Dạ em cảm ơn anh/chị. Trước khi phản hồi, em muốn hiểu rõ tổng thu nhập: 7 triệu là gross hay net, đã gồm phụ cấp chưa? Khi làm ngoài giờ hoặc cuối tuần cho sự kiện thì tính tăng ca hay nghỉ bù, và công ty có hỗ trợ di chuyển, ăn uống không? Nếu 7 triệu là mức cố định, em mong được cân nhắc thêm phụ cấp hoặc lộ trình xem xét lại lương sau thử việc.&quot;,&quot;Hỏi toàn bộ khoản ngoài lương cơ bản trước khi đồng ý hay từ chối.&quot;],
+[&quot;Tình huống 3: HR đề xuất 7,5 triệu&quot;,&quot;Mức 7,5 triệu thì sao?&quot;,&quot;Dạ mức này gần với kỳ vọng của em. Em muốn hỏi thêm: công ty đánh giá sau thử việc theo tiêu chí nào, và nếu đạt thì lương được điều chỉnh khi nào, khoảng bao nhiêu? Nếu có thể ghi rõ lộ trình điều chỉnh trong thư mời nhận việc, em sẵn sàng xác nhận.&quot;,&quot;Tập trung vào đánh giá và điều chỉnh sau thử việc, không ép nâng ngay.&quot;],
+[&quot;Tình huống 4: HR đề xuất 8 triệu&quot;,&quot;Công ty đề xuất 8 triệu, bạn thấy thế nào?&quot;,&quot;Dạ em cảm ơn anh/chị, mức 8 triệu nằm trong khoảng em mong muốn. Để em xác nhận chính xác, anh/chị cho em hỏi mức này là gross hay net, mức lương và thời gian thử việc, thời điểm đóng BHXH, cùng các khoản phúc lợi như phụ cấp, tăng ca, công tác. Sau khi có thư mời, em xin xác nhận.&quot;,&quot;Xác nhận bằng văn bản (email/thư mời) trước khi chấp nhận.&quot;],
+[&quot;Tình huống 5: HR hỏi tại sao bạn xứng đáng với mức lương này&quot;,&quot;Tại sao chúng tôi nên trả mức lương này cho bạn?&quot;,&quot;Dạ, em học đúng chuyên ngành Logistics và Quản lý Chuỗi cung ứng với GPA 3.74/4.0. Tại J&amp;T, em kiểm tra trọng lượng, đối chiếu dữ liệu đơn hàng và xử lý tối thiểu 2.000 đơn mỗi ngày nên em quen với việc kiểm tra thông tin chính xác. Em cũng chủ động học thêm, như khóa Xuất nhập khẩu và Logistics. Em chưa có kinh nghiệm kho thực tế, nhưng em tin sự cẩn thận và học nhanh sẽ giúp em đóng góp sớm.&quot;,&quot;Không nói quá. Nêu đúng điều đã làm, thừa nhận điều chưa có.&quot;]];
+$(&#x27;#sc&#x27;).innerHTML=SC.map((s,i)=&gt;`&lt;div class=&quot;card&quot;&gt;&lt;h3&gt;${s[0]}&lt;/h3&gt;&lt;p class=&quot;hr&quot;&gt;&lt;b&gt;HR:&lt;/b&gt; ${s[1]}&lt;/p&gt;&lt;p class=&quot;me&quot; id=&quot;m${i}&quot;&gt;&lt;b&gt;Giang:&lt;/b&gt; ${s[2]}&lt;/p&gt;&lt;p class=&quot;nt&quot;&gt;Gợi ý: ${s[3]}&lt;/p&gt;&lt;button onclick=&quot;cpt(SC[${i}][2],this)&quot;&gt;Sao chép câu trả lời&lt;/button&gt;&lt;/div&gt;`).join(&#x27;&#x27;);
+function cpt(t,b){const ok=()=&gt;{const o=b.textContent;b.textContent=&#x27;Đã sao chép&#x27;;setTimeout(()=&gt;b.textContent=o,1500)};
+if(navigator.clipboard)navigator.clipboard.writeText(t).then(ok,()=&gt;fb(t,ok));else fb(t,ok)}
+function fb(t,ok){const a=document.createElement(&#x27;textarea&#x27;);a.value=t;document.body.appendChild(a);a.select();try{document.execCommand(&#x27;copy&#x27;);ok()}catch(e){}a.remove()}
+const CK=[&quot;Đã xác nhận lương là gross hay net&quot;,&quot;Đã biết thời gian và mức lương thử việc&quot;,&quot;Đã rõ các khoản phụ cấp (ăn uống, gửi xe, điện thoại, di chuyển)&quot;,&quot;Đã rõ chính sách tăng ca: tính tiền hay nghỉ bù&quot;,&quot;Đã rõ phụ cấp làm cuối tuần và ngoài giờ cho sự kiện&quot;,&quot;Đã rõ hỗ trợ chi phí công tác&quot;,&quot;Đã biết thời điểm đóng BHXH&quot;,&quot;Đã biết bao lâu xem xét điều chỉnh lương&quot;,&quot;Đã rõ mô tả công việc: tỷ lệ kho và sự kiện&quot;,&quot;Đã nhận offer bằng văn bản (email hoặc thư mời)&quot;];
+let C;try{C=JSON.parse(localStorage.getItem(&#x27;pck&#x27;))||{}}catch(e){C={}}
+$(&#x27;#ck&#x27;).innerHTML=CK.map((t,i)=&gt;`&lt;label&gt;&lt;input type=&quot;checkbox&quot; ${C[i]?&#x27;checked&#x27;:&#x27;&#x27;} onchange=&quot;tk(${i},this.checked)&quot;&gt; ${t}&lt;/label&gt;`).join(&#x27;&#x27;)+&#x27;&lt;p id=&quot;cc&quot;&gt;&lt;/p&gt;&#x27;;
+function tk(i,v){C[i]=v;try{localStorage.setItem(&#x27;pck&#x27;,JSON.stringify(C))}catch(e){}cn()}
+function cn(){$(&#x27;#cc&#x27;).innerHTML=&#x27;&lt;b&gt;&#x27;+CK.filter((_,i)=&gt;C[i]).length+&#x27;/&#x27;+CK.length+&#x27;&lt;/b&gt; mục đã xác nhận&#x27;}cn();
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;
+"></iframe>
+<script>
+function show(n){for(const i of [1,2]){document.getElementById('f'+i).classList.toggle('on',i==n);document.getElementById('b'+i).classList.toggle('on',i==n)}
+try{history.replaceState(null,'',n==2?'#luong':'#phongvan')}catch(e){}}
+document.getElementById('b1').onclick=()=>show(1);document.getElementById('b2').onclick=()=>show(2);
+show(location.hash=='#luong'?2:1);
+</script></body></html>
